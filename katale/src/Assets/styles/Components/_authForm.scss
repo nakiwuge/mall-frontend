@@ -1,0 +1,51 @@
+.auth-form{
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.897);
+
+    .form {
+     width: 80%;
+     margin-top: 10%;
+     margin-left: 10%;
+    }
+    .button{
+        margin-left: 35%;
+        margin-top: 5%;
+    }
+
+    .error{
+        color: #f44336;
+    }
+
+    .header{
+        color: $color-secondary;
+        margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 9%;
+        font-size: 30px;
+        font-weight: 400;
+        height: auto;
+        background-color: #f4433633;
+        text-align: center;
+    }
+
+    .action-links{
+        margin-top: 3%;
+        margin-left: 25%;
+    }
+
+    .link{
+        color:'#4255B1';
+        font-size: 13px;
+
+    }
+
+    .password-info{
+        color:#298FBE;
+        font-size:12px
+    }
+
+    .invalid-email{
+        color:$color-error;
+        font-size:12px
+    }
+}
