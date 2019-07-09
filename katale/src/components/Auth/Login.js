@@ -5,12 +5,20 @@ import backgroundImage from '../../Assets/images/shopping-bag.png';
 import { loginUser } from '../../Actions/UserAction';
 import { Redirect } from 'react-router-dom';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 class Login extends Component {
   state = {
     isLoading: false,
     email: '',
     password: '',
+    open:false,
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.user  ){
+      return this.props.history.push('/');
+    }
   }
 
   handleChange =  name =>  (event)=>{
@@ -25,10 +33,18 @@ class Login extends Component {
     const data = { email, password };
 
     this.setState({ isLoading: true });
-    this.props.loginUser(data).then(()=>{
-      this.setState({
-        isLoading: false
-      });
+    await this.props.loginUser(data);
+    this.setState({ isLoading: false });
+  }
+
+  handleClose=()=>{
+    this.setState({
+      open:false
+    });
+  }
+  onClick=()=>{
+    this.setState({
+      open:true
     });
   }
 
@@ -43,6 +59,7 @@ class Login extends Component {
       email,
       password,
       isLoading,
+      open
     } = this.state;
 
     return (
@@ -58,9 +75,14 @@ class Login extends Component {
               data={{email,password}}
               error={this.props.error}
               isValid={true}
+              onClick={this.onClick}
             />
           </div>
         </div>
+        <ForgotPasswordModal
+          open={open}
+          handleClose={this.handleClose}
+        />
       </React.Fragment>
     );
   }

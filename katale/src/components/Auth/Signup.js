@@ -6,6 +6,7 @@ import { addUser } from '../../Actions/UserAction';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import ModalContainer from '../common/modal';
 import Typography from '@material-ui/core/Typography';
+import { getRoles } from '../../Actions/rolesAction';
 
 class Signup extends Component {
   state = {
@@ -19,6 +20,10 @@ class Signup extends Component {
     isValid: false,
     emailError:null,
     open: false,
+    role:''
+  }
+  componentDidMount(){
+    this.props.getRoles();
   }
 
   handleChange =  name =>  (event)=>{
@@ -29,6 +34,7 @@ class Signup extends Component {
       password,
       phoneNumber,
       confirmPassword,
+      role
     } = this.state;
 
     const { value } = event.target;
@@ -41,6 +47,7 @@ class Signup extends Component {
         password,
         phoneNumber,
         confirmPassword,
+        role,
       };
 
       const valid = await this.validate(data);
@@ -75,6 +82,7 @@ class Signup extends Component {
       password,
       confirmPassword,
       phoneNumber,
+      role
     } = this.state;
     const data = {
       firstName,
@@ -82,7 +90,8 @@ class Signup extends Component {
       lastName,
       password,
       confirmPassword,
-      phoneNumber
+      phoneNumber,
+      role
     };
 
     this.setState({
@@ -103,6 +112,7 @@ class Signup extends Component {
           phoneNumber: '',
           password: '',
           confirmPassword: '',
+          role:''
         });
       }
     });
@@ -159,7 +169,8 @@ class Signup extends Component {
       isLoading,
       isValid,
       emailError,
-      open
+      open,
+      role
     } = this.state;
 
     return (
@@ -179,11 +190,12 @@ class Signup extends Component {
                   lastName,
                   password,
                   confirmPassword,
-                  phoneNumber}
+                  phoneNumber,role}
               }
               isValid={isValid}
               error={this.props.error}
               emailError={emailError}
+              roles = {this.props.roles}
             />
           </div>
           <ModalContainer
@@ -199,11 +211,13 @@ class Signup extends Component {
 
 const mapStateToProps = state => ({
   user: state.userReducer.user,
+  roles: state.roleReducer.roles,
   error: state.userReducer.error,
 });
 
 const mapDispatchToProps = {
   addUser,
+  getRoles
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -23,12 +23,8 @@ class Verify extends Component {
     }
     return (
       <div className="verify">
-
-        <div className="header">
-          <p className="heading">Katale</p>
-        </div>
         {this.state.isLoading
-          ?<Spinner/>
+          ?<div className="spinner"><Spinner /></div>
           : <div>
             <div className="error">{this.props.error}</div>
             <div className="verify-body">

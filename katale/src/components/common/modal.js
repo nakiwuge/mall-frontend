@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
+import Spinner from './Spinner';
 
 const ModalContainer = (props)=>  {
-  const { open, handleClose, renderContent } = props;
+  const { open, handleClose, renderContent, isLoading } = props;
 
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -30,8 +31,11 @@ const ModalContainer = (props)=>  {
         open={open}
         onClose={handleClose}
       >
-        <div style={modalstyle}className={newClass.paper}>
+        <div style={modalstyle} className={newClass.paper}>
           {renderContent()}
+          <div className="spinner" hidden={!isLoading}>
+            <Spinner />
+          </div>
         </div>
       </Modal>
     </div>

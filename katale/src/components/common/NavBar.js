@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
-  state ={
-    redirect:false
-  }
-
-  handleRedirect= async()=>{
-    await this.setState({redirect:true});
-
-    if (this.state.redirect){
-      return <Redirect to='/signup'/>;
-    }
-  }
 
   render() {
     return (
@@ -29,7 +18,6 @@ class NavBar extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
             </div>
-
             <div className="nav-right">
               <li><Link to="/signup">Sign up</Link></li>
               <li><Link to="/login">Login</Link></li>

@@ -48,4 +48,17 @@
         color:$color-error;
         font-size:12px
     }
+    .reset-password {
+        color: $color-link;
+        font-size: 13px;
+        cursor: pointer;
+    }
+    .MuiFormLabel-root.Mui-focused{
+        color:black;
+        font-size: 20px;
+    }
+
+    .MuiInput-underline:after {
+        border-bottom: 2px solid black;
+    }
 }

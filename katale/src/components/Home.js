@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Home extends Component {
-  state = {
-    isLoading:true
-  }
 
   render() {
 
@@ -13,7 +10,7 @@ class Home extends Component {
       <React.Fragment>
 
         <div>
-               This Home page
+          <span name="3" >This Home page</span>
         </div>
 
       </React.Fragment>

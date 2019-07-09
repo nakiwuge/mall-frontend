@@ -1,7 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { CssTextField } from './overideStyles';
+import { CssTextField} from './overideStyles';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 
 const AuthForm = (props)=>  {
   const {
@@ -11,6 +15,8 @@ const AuthForm = (props)=>  {
     handleSubmit,
     isValid,
     emailError,
+    onClick,
+    roles,
     data: {
       firstName,
       lastName,
@@ -18,8 +24,16 @@ const AuthForm = (props)=>  {
       phoneNumber,
       password,
       confirmPassword,
+      role
 
     } } = props;
+  let buyer ='';
+  let seller = '';
+
+  if (roles){
+    buyer = roles.find((role)=> role.name === 'buyer');
+    seller = roles.find((role)=> role.name === 'seller');
+  }
 
   return (
     <div className="auth-form">
@@ -69,6 +83,23 @@ const AuthForm = (props)=>  {
             value={phoneNumber}
           />
         </div>
+        <div hidden={authType==='login'}>
+          <FormControl  fullWidth>
+            <InputLabel   htmlFor="role">Register as</InputLabel>
+            <Select
+              value={role}
+              onChange={handleChange('role')}
+              inputProps={{
+                name: 'role',
+                id: 'role-select',
+              }}
+            >
+              <MenuItem value={buyer.id}>Buyer</MenuItem>
+              <MenuItem value={seller.id}>Seller</MenuItem>
+            </Select>
+
+          </FormControl >
+        </div>
         <div>
           <CssTextField
             id="standard-password-input"
@@ -81,7 +112,7 @@ const AuthForm = (props)=>  {
           />
         </div >
         <div className="password-info" hidden={authType==='login'}>
-            password should be a minimum of 8 characters
+            password should be a minimum of 6 characters
         </div >
         <div  hidden={authType==='login'}>
           <CssTextField
@@ -113,7 +144,7 @@ const AuthForm = (props)=>  {
       </form>
       <div className="action-links" hidden={authType==='login'}>Already have an account? <span className="link"><Link to='/login'>Login</Link></span></div>
       <div className="action-links" hidden={authType==='signup'}>New member? <span className="link"><Link to='/signup'>Create Account</Link></span></div>
-      <div className="action-links" hidden={authType==='signup'}>Forgot password? <span className="link"><Link to='/forgot-password'>Reset Password</Link></span></div>
+      <div className="action-links" hidden={authType==='signup'}>Forgot password? <span className="reset-password" onClick={onClick}>Reset Password</span></div>
     </div>
   );
 };
