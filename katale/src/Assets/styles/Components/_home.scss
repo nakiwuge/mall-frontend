@@ -1,0 +1,26 @@
+.home{
+    width: 100%;
+    position: relative;
+
+    .btn-add-store{
+     float:right;
+     margin-right:2%;
+     padding-top: 10px;
+
+     button{
+         height: 50px;
+         width: 130px;
+         background-color: $color-primary;
+         color: $color-white;
+         font-size: 17px;
+         border-radius:5px;
+         cursor: pointer;
+         outline: none;
+     }
+     
+     button:hover{
+        background-color: $color-secondary;
+        color:$color-grey-light;
+     }
+    }
+}

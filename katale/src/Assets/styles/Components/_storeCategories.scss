@@ -1,0 +1,45 @@
+.store-categories{
+
+   .table{
+       margin: 10%;
+   }
+
+   .edit{
+
+    color:$color-info;
+    cursor: pointer;
+     }
+    .delete{
+        color:$color-primary;
+        cursor: pointer;
+
+    }
+    .disabled{
+        color:$color-grey-light;
+        cursor: not-allowed;
+    }
+    .heading{
+        margin-top:3%;
+        margin-bottom:3%;
+        span{
+            font-size: 35px;
+            color: $color-info;
+        }
+
+            button{
+                height: 50px;
+                width: 180px;
+                background-color: $color-primary;
+                color: $color-white;
+                font-size: 17px;
+                border-radius:5px;
+                cursor: pointer;
+                outline: none;
+                float:right;
+            }
+            button:hover{
+            background-color: $color-secondary;
+            color:$color-grey-light;
+            }
+
+}}
