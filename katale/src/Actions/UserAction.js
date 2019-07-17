@@ -10,6 +10,8 @@ import {
   SEND_FORGOT_PASSWORD_EMAIL_FAILURE,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILURE,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE
 } from './types';
 
 const authType = (type, payload)=> ({
@@ -17,6 +19,40 @@ const authType = (type, payload)=> ({
   payload,
 });
 const host = window.location.origin;
+
+export const getUser = (id)=>dispatch=>{
+
+  const requestBody = {
+    query: `
+    {
+      user(id:"${id}"){
+          id
+          email
+       firstName
+         role{
+           id
+           name
+         }
+         stores{
+           id
+           name
+         }
+     }
+   } `
+  };
+
+  return axios.post('', requestBody).then((response)=>{
+    if (response.data.errors){
+      const error = response.data.errors[0].message;
+
+      return dispatch(authType(GET_USER_FAILURE, error));
+    }
+
+    dispatch(authType(GET_USER_SUCCESS, response.data.data.user));
+  }).catch(() =>{
+    return dispatch(authType(GET_USER_FAILURE, 'Something went wrong. Please Try again later.'));
+  });
+};
 
 export const addUser = (data)=>dispatch=>{
   const{
@@ -62,6 +98,7 @@ export const addUser = (data)=>dispatch=>{
 };
 
 export const loginUser = (data)=>dispatch=>{
+  console.log('lllllll');
   const{
     email,
     password,
@@ -69,20 +106,25 @@ export const loginUser = (data)=>dispatch=>{
 
   const requestBody = {
     query: `
-                {
-                  login(email: "${email}",password: "${password}", ){
-                    token
-                    user{
-                        firstName
-                        email
-                        id
+    {
+      login(email:"${email}", password:"${password}"){
+        token
 
-                  }}
-                }
+        user{
+          email
+          id
+          isVerified
+          role {
+            id
+          }
+        }
+      }
+    }
               `
   };
 
   return axios.post('', requestBody).then((response)=>{
+
     if (response.data.errors){
       const error = response.data.errors[0].message;
 
@@ -92,10 +134,11 @@ export const loginUser = (data)=>dispatch=>{
 
       return dispatch(authType(LOGIN_USER_FAILURE, error));
     }
-    localStorage.setItem('token',response.data.data.login.token);
+    localStorage.setItem('jwt-token',response.data.data.login.token);
     dispatch(authType(LOGIN_USER_SUCCESS, response.data.data.login));
 
   }).catch(() =>{
+
     return dispatch(authType(LOGIN_USER_FAILURE, 'Something went wrong. Please Try again later.'));
   });
 };
@@ -170,7 +213,7 @@ export const resetPassword = (data)=>dispatch=>{
     if (response.data.errors){
       const error = response.data.errors[0].message;
 
-      if(error==='jwt expired' ||error=== 'TokenExpiredError: jwt expired' || error=='JsonWebTokenError: invalid token'){
+      if(error==='jwt expired' ||error=== 'TokenExpiredError: jwt expired' || error==='JsonWebTokenError: invalid token'){
         return dispatch(authType(RESET_PASSWORD_FAILURE, 'The verification link expired or invalid please contact support'));
       }
 
@@ -188,7 +231,8 @@ const authInitialState ={
   user:null,
   error:null,
   verifiedUser:null,
-  emailSent:null
+  emailSent:null,
+  currentUser:null
 };
 
 const userReducer = (state = authInitialState, action) => {
@@ -212,6 +256,10 @@ const userReducer = (state = authInitialState, action) => {
   case RESET_PASSWORD_SUCCESS:
     return {...state, user: action.payload };
   case RESET_PASSWORD_FAILURE:
+    return { ...state, error: action.payload };
+  case  GET_USER_SUCCESS:
+    return {...state, currentUser: action.payload };
+  case  GET_USER_FAILURE:
     return { ...state, error: action.payload };
   default:
     return state;

@@ -7,18 +7,14 @@ import { Redirect } from 'react-router-dom';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import ForgotPasswordModal from './ForgotPasswordModal';
 
+const redirect = localStorage.getItem('locationReferrer');
+
 class Login extends Component {
   state = {
     isLoading: false,
     email: '',
     password: '',
     open:false,
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(nextProps.user  ){
-      return this.props.history.push('/');
-    }
   }
 
   handleChange =  name =>  (event)=>{
@@ -34,7 +30,12 @@ class Login extends Component {
 
     this.setState({ isLoading: true });
     await this.props.loginUser(data);
-    this.setState({ isLoading: false });
+    await this.setState({ isLoading: false });
+
+    if(redirect){
+
+      return this.props.history.push(`${redirect}`);
+    }
   }
 
   handleClose=()=>{
@@ -49,7 +50,8 @@ class Login extends Component {
   }
 
   render() {
-    if(this.props.user){
+
+    if(this.props.user && !redirect){
       if(this.props.user.token){
         return <Redirect to='/'/>;
       }
