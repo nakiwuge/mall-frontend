@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { resetPassword } from '../../Actions/UserAction';
 import Spinner from '../common/Spinner';
 import { CssTextField } from './overideStyles';

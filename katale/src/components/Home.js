@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -8,11 +7,14 @@ class Home extends Component {
 
     return (
       <React.Fragment>
-
-        <div>
-          <span name="3" >This Home page</span>
-        </div>
-
+        <section>
+          <div className="home">
+           This Home page
+            <div className="btn-add-store">
+              <button>Add Store</button>
+            </div>
+          </div>
+        </section>
       </React.Fragment>
     );
   }
