@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
+import Stores from './Stores/Stores';
+import AddStore from './Stores/AddStore';
+import Restricted from './Protected/Restricted';
 
 class Home extends Component {
+  state = {
+    open:false,
+  }
+
+  handleClose=()=>{
+    this.setState({
+      open:false,
+    });
+  }
+
+  onClick=()=>{
+    this.setState({
+      open:true,
+    });
+  }
 
   render() {
 
@@ -10,9 +27,20 @@ class Home extends Component {
       <React.Fragment>
         <section>
           <div className="home">
-           This Home page
-            <div className="btn-add-store">
-              <button>Add Store</button>
+            <div className="header">
+              <span>Stores</span>
+              <Restricted roles={['admin', 'superAdmin','seller']}>
+                <button onClick={this.onClick}>Add Store</button>
+              </Restricted>
+            </div>
+            <div >
+              <Stores/>
+            </div>
+            <div>
+              <AddStore
+                open={this.state.open}
+                handleClose={this.handleClose}
+              />
             </div>
           </div>
         </section>
