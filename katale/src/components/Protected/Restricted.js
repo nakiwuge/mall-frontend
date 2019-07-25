@@ -7,6 +7,7 @@ class Restricted extends Component  {
   async componentWillMount(){
 
     const user = await authService.decodeToken();
+
     if(user){
       this.props.getUser(user.userId);
     }
@@ -17,9 +18,11 @@ class Restricted extends Component  {
     let isAuthorized;
 
     if (currentUser){
+
       isAuthorized = roles.includes(currentUser.role.name);
 
     }
+
     return (
       <div hidden = {!isAuthorized}>
         {children}

@@ -1,0 +1,40 @@
+.stores{
+    margin-left: 5%;
+    margin-top:-5%;
+    position: relative;
+    background-color: $color-white;
+    width: 90%;
+    padding: 0.5%;
+    margin-bottom: 5%;
+
+    .card{
+        display: inline-block;
+        margin: 0.3%;
+
+        .MuiTypography-colorPrimary {
+            color: $color-primary;
+            opacity: 0.8;
+        }
+
+        .MuiTypography-colorSecondary {
+            color: rgb(56, 54, 54);
+            opacity: 0.8;
+            font-size:16px;
+
+            span{
+                color: rgb(56, 54, 54);
+                opacity: 0.9;
+                font-size:15px;
+               }
+        }
+
+        .MuiTypography-colorTextPrimary{
+            color: rgb(56, 54, 54);
+            opacity: 0.7;
+        }
+        
+        .card-content{
+            border-top: 1px solid $color-grey-light;
+        }
+    }
+}

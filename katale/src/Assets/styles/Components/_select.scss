@@ -1,0 +1,10 @@
+.select{
+    .MuiFormLabel-root.Mui-focused{
+        color:black;
+        font-size: 20px;
+    }
+
+    .MuiInput-underline:after {
+        border-bottom: 2px solid black;
+    }
+}

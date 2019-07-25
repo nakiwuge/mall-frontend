@@ -98,7 +98,6 @@ export const addUser = (data)=>dispatch=>{
 };
 
 export const loginUser = (data)=>dispatch=>{
-  console.log('lllllll');
   const{
     email,
     password,

@@ -2,12 +2,15 @@
     width: 100%;
     position: relative;
 
-    .btn-add-store{
-     float:right;
-     margin-right:2%;
-     padding-top: 10px;
+    .header{
+      margin: 7% 4% 3% 5%;
+      span{
+        font-size: 35px;
+        color: $color-info;
+      }
 
-     button{
+    button{
+         float:right;
          height: 50px;
          width: 130px;
          background-color: $color-primary;
@@ -17,7 +20,7 @@
          cursor: pointer;
          outline: none;
      }
-     
+
      button:hover{
         background-color: $color-secondary;
         color:$color-grey-light;
