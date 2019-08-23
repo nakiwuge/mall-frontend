@@ -32,6 +32,14 @@
         &_icon::before{
             content:' '
         }
+        .categories{
+            color:$color-secondary;
+            padding:10px;
+        }
+        .categories:hover{
+            background-color:$color-light;
+        color:rgb(34, 32, 32);
+        }
     }
 
     .nav-right {
@@ -54,13 +62,34 @@
     a:hover {
         background-color:$color-light;
         color:rgb(34, 32, 32);
-        border-radius: 20px;
       }
 
     .bottom {
     height: 35px;
     background-color: $color-primary;
     padding-top: 2px;
+    }
+
+    .dropdown{
+        margin-left:-1%;
+        background-color: $color-white;
+        position:absolute;
+        box-shadow: 3px 3px 7px rgb(117, 108, 108);
+
+        div{
+           padding: 10px 0 10px 0;
+           text-align: center;
+           margin-top:0;
+           a{
+
+           padding: 5px;
+           }
+        }
+
+        div:hover {
+            background-color:$color-light;
+            color:rgb(34, 32, 32);
+          }
     }
 
     @media screen and (max-width: 900px) {

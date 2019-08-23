@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editStoreCategory, getStoreCategories } from '../../Actions/storeCategory';
-import StoreCategoryModal from './StoreCategoryModal';
+import CategoryModal from './CategoryModal';
 
 class EditStoreCategory extends Component {
   state = {
@@ -72,7 +72,7 @@ class EditStoreCategory extends Component {
   render() {
     return (
       <div >
-        <StoreCategoryModal
+        <CategoryModal
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           action={this.props.action}
@@ -81,6 +81,7 @@ class EditStoreCategory extends Component {
           open={this.props.open}
           handleClose={this.props.handleClose}
           editName={ this.state.name}
+          title="Edit Store Category"
         />
       </div>
     );

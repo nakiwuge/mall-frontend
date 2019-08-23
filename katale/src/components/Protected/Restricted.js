@@ -18,9 +18,7 @@ class Restricted extends Component  {
     let isAuthorized;
 
     if (currentUser){
-
       isAuthorized = roles.includes(currentUser.role.name);
-
     }
 
     return (

@@ -10,6 +10,7 @@ import StoreCategories from './Stores/StoreCategories';
 import Layout from './common/Layout';
 import ProtectedRoute from './Protected/protectedRoute';
 import ViewStore from './Stores/ViewStore';
+import ItemCategories from './Stores/Items/ItemCategories';
 
 export const NotFound = () => (
   <h1>Page Not Found</h1>
@@ -29,6 +30,7 @@ class App extends Component {
             <Route exact path="/verify/:token" component={Verify} />
             <Route exact path="/reset-password/:token" component={ResetPassword} />
             <ProtectedRoute exact path="/store-categories" component={StoreCategories} role={['admin', 'superAdmin']}/>
+            <ProtectedRoute exact path="/item-categories" component={ItemCategories} role={['admin', 'superAdmin']}/>
             <ProtectedRoute exact path="/stores/:id" component={ViewStore} role={['admin', 'superAdmin','seller', 'buyer']}/>
             <Route component={NotFound} />
           </Switch>

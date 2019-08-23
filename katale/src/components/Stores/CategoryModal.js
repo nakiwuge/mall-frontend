@@ -14,7 +14,7 @@ const theme = createMuiTheme({
   },
 });
 
-const  StoreCategoryModal = (props)=>{
+const CategoryModal = (props)=>{
   const {
     handleChange,
     handleSubmit,
@@ -24,16 +24,16 @@ const  StoreCategoryModal = (props)=>{
     open,
     handleClose,
     editName,
-    name
+    name,
+    title
   }=props;
 
   const  renderContent =()=>{
-
     return(
       <div >
         <div>
           <Typography variant="h5" id="modal-title" color="secondary" >
-            { (action==='edit')?'Edit Store Category':'Add Store Category'}
+            {title}
           </Typography>
           <Typography variant="subtitle2" id="simple-modal-description" color="error" >
             <div className="error">{error}</div>
@@ -68,7 +68,6 @@ const  StoreCategoryModal = (props)=>{
   };
 
   return (
-
     <div >
       <ThemeProvider theme={theme}>
         <ModalContainer
@@ -82,4 +81,4 @@ const  StoreCategoryModal = (props)=>{
   );
 };
 
-export default StoreCategoryModal;
+export default CategoryModal;
