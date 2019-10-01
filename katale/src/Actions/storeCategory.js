@@ -40,6 +40,7 @@ export const getStoreCategories = ()=> async dispatch=>{
   };
 
   return axios.post('', requestBody, headers).then((response)=>{
+    
     if (response.data.errors){
       const error = response.data.errors[0].message;
 

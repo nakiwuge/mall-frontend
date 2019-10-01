@@ -25,3 +25,13 @@ export const toTitleCase = (string) => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 };
+
+export const currency = (string)=>{
+  const toNumber = string&&parseInt(string.replace(/\D/g, ''));
+
+  if(isNaN(toNumber)){
+    return '';
+  }
+
+  return toNumber.toLocaleString();
+};

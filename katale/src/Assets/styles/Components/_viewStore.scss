@@ -10,7 +10,7 @@
         margin-top: 5%;
         padding-bottom: 1%;
         width: 17%;
-        height:500px;
+        height:800px;
         background-color: $color-white;
         border-right:1px solid $color-grey-light;
 
@@ -35,14 +35,20 @@
 
             p{
                 padding:5% 0 5% 0;
-                color:$color-primary;
+
                 cursor: pointer;
                 margin:0;
                 text-align: center;
+                a{
+                    color:$color-primary;
+                }
             }
             p:hover{
                 background-color: rgba(82, 79, 79, 0.151);
-                color:$color-white;
+
+                a{
+                    color:$color-white;
+                }
             }
         }
     }
@@ -52,88 +58,5 @@
         margin-left: 3%;
         vertical-align: top;
         width:75%;
-
-        .items{
-            .header{
-                margin: 7% 0 5% 0;
-                span{
-                    font-size:  30px;
-                    color:$color-info;
-                }
-
-                button{
-                    float:right;
-                    height: 50px;
-                    width: 130px;
-                    background-color: $color-primary;
-                    color: $color-white;
-                    font-size: 17px;
-                    border-radius:5px;
-                    cursor: pointer;
-                    outline: none;
-                }
-
-                button:hover{
-                   background-color: $color-secondary;
-                   color:$color-grey-light;
-                }
-            }
-        }
-
-        .store-details{
-             .header{
-                 margin: 7% 0 5% 35%;
-                 span{
-                     font-size:  30px;
-                     color:$color-info;
-                 }
-             }
-             .details{
-                 width:70%;
-                 margin:5% 5% 0 10%;
-
-                 div{
-                     margin:1% 1% 5% 1%;
-                     border-bottom:1px solid rgba(197, 196, 196, 0.692);
-                 }
-                 .label{
-                     font-size: 19px;
-                     font-weight: bold;
-                     margin-right: 0.5%;
-                     opacity:0.7;
-                 }
-                 p{
-                     margin:0;
-                 }
-                 .value{
-                    font-size: 18px;
-                   float:right;
-                    opacity:0.6;
-                }
-             }
-
-             .action{
-                 margin: 10% 1% 1% 40%;
-                .edit{
-                    color:$color-info;
-                    font-size: 15px;
-                    margin-right: 5%;
-                    cursor: pointer;
-
-                 }
-                 .delete{
-                    color:$color-primary;
-                    font-size: 15px;
-                    cursor: pointer;
-                 }
-                 .edit:hover{
-
-                    opacity:0.5;
-                }
-                .delete:hover{
-                   opacity:0.5;
-               }
-            }
-         }
     }
 }

@@ -19,7 +19,6 @@ const storeType = (type, payload)=> ({
 });
 
 export const getStores = ()=> async dispatch=>{
-
   const requestBody = {
     query: `
     {
@@ -39,7 +38,6 @@ export const getStores = ()=> async dispatch=>{
              firstName
            }
        }
-
      } `
   };
 
@@ -59,7 +57,6 @@ export const getStores = ()=> async dispatch=>{
 };
 
 export const getOneStore = (id)=> async dispatch=>{
-
   const requestBody = {
     query: `
     {
@@ -80,12 +77,21 @@ export const getOneStore = (id)=> async dispatch=>{
              lastName
              phoneNumber
            }
+           items{
+            id
+            name
+            imageUrl
+            price
+            negotiable
+            description
+          }
        }
      } `
   };
 
   return axios.post('', requestBody).then((response)=>{
-    const {errors, data} = response.data;
+    const { errors, data } = response.data;
+
     if (errors){
       const error = errors[0].message;
 
@@ -112,8 +118,8 @@ export const addStore = (data)=>async dispatch=>{
 
   const requestBody = {
     query: `
-mutation{
-addStore(name:"${name}",category:"${category}",imageUrl:"${imageUrl}",description:"${description}"){
+    mutation{
+    addStore(name:"${name}",category:"${category}",imageUrl:"${imageUrl}",description:"${description}"){
     id
     name
  }
@@ -149,13 +155,13 @@ export const editStore = (data)=>async dispatch=>{
 
   const requestBody = {
     query: `
-mutation{
-updateStore(
-  id:"${id}",
-  name:"${name}",
-  category:"${category}",
-  imageUrl:"${newImageUrl}",
-  description:"${description}"){
+    mutation{
+    updateStore(
+    id:"${id}",
+    name:"${name}",
+    category:"${category}",
+    imageUrl:"${newImageUrl}",
+    description:"${description}"){
     id
     name
     imageUrl
@@ -181,7 +187,6 @@ updateStore(
 
 export const deleteStore = id => async dispatch=>{
   const headers = await config();
-
   const requestBody = {
     query: `
 mutation{
@@ -193,7 +198,6 @@ deleteStore(id:"${id}"){
   };
 
   return axios.post('', requestBody, headers ).then( (response)=>{
-
     if (response.data.errors){
       const error = response.data.errors[0].message;
 
@@ -211,22 +215,22 @@ const storeInitialState = {
   stores:null,
   store:null,
   error:null,
+  storeItems:[],
   deletedStore:null
 };
 
 const storeReducer = (state = storeInitialState, action) => {
-
   switch(action.type){
   case GET_STORES_SUCCESS:
     return {...state, stores: action.payload.reverse()};
   case GET_STORES_FAILURE:
     return {...state, error: action.payload};
   case ADD_STORE_SUCCESS:
-    return {...state, store: action.payload, };
+    return {...state, store: action.payload,  };
   case ADD_STORE_FAILURE:
     return {...state, error: action.payload};
   case GET_ONE_STORE_SUCCESS:
-    return {...state, store: action.payload};
+    return {...state, store: action.payload, storeItems:action.payload.items.reverse()};
   case GET_ONE_STORE_FAILURE:
     return {...state, error: action.payload};
   case EDIT_STORE_SUCCESS:

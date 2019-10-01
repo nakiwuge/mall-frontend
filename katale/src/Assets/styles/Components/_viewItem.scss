@@ -1,0 +1,47 @@
+.view-item{
+    .wrapper{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap:1%;
+        margin-bottom: 2%;
+        .left{
+             margin-top: 10%;
+             img{
+                 height: 100%;
+                 width: 100%;
+             }
+         }
+         .right{
+            margin-top: 30%;
+            text-align: center;
+
+            .header{
+               margin-bottom: 5%;
+                color: $color-info;
+                font-size: 23px;
+            }
+            .price{
+                font-weight: bold;
+                margin-bottom: 5%;
+                font-size:20px;
+            }
+            .contact-link{
+                a{
+                    color:$color-info;
+                }
+            }
+            .actions{
+                margin-top: 30%;
+                .edit{
+                    color:$color-info;
+                    padding-right: 5%;
+                    cursor: pointer;
+                }
+                .delete{
+                    color:$color-primary;
+                    cursor: pointer;
+                }
+            }
+         }
+    }
+}

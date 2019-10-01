@@ -31,7 +31,7 @@ class App extends Component {
             <Route exact path="/reset-password/:token" component={ResetPassword} />
             <ProtectedRoute exact path="/store-categories" component={StoreCategories} role={['admin', 'superAdmin']}/>
             <ProtectedRoute exact path="/item-categories" component={ItemCategories} role={['admin', 'superAdmin']}/>
-            <ProtectedRoute exact path="/stores/:id" component={ViewStore} role={['admin', 'superAdmin','seller', 'buyer']}/>
+            <ProtectedRoute  path="/stores/:id" component={ViewStore} role={['admin', 'superAdmin','seller', 'buyer']}/>
             <Route component={NotFound} />
           </Switch>
         </Layout>

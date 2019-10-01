@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUser } from '../../Actions/UserAction';
 import Restricted from '../Protected/Restricted';
 import { authService } from '../../utils/authentication';
 
@@ -77,14 +75,4 @@ class NavBar extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  user: state.userReducer.user,
-  error: state.userReducer.error,
-  currentUser: state.userReducer.currentUser,
-});
-
-const mapDispatchToProps = {
-  getUser
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

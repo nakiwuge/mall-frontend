@@ -1,0 +1,53 @@
+.store-details{
+    .header{
+        margin: 3% 0 5% 35%;
+        span{
+            font-size:  30px;
+            color:$color-info;
+        }
+    }
+    .details{
+        width:70%;
+        margin:5% 5% 0 10%;
+
+        div{
+            margin:1% 1% 5% 1%;
+            border-bottom:1px solid rgba(197, 196, 196, 0.692);
+        }
+        .label{
+            font-size: 19px;
+            font-weight: bold;
+            margin-right: 0.5%;
+            opacity:0.7;
+        }
+        p{
+            margin:0;
+        }
+        .value{
+           font-size: 18px;
+          float:right;
+           opacity:0.6;
+       }
+    }
+
+    .action{
+        margin: 10% 1% 1% 40%;
+       .edit{
+           color:$color-info;
+           font-size: 15px;
+           margin-right: 5%;
+           cursor: pointer;
+        }
+        .delete{
+           color:$color-primary;
+           font-size: 15px;
+           cursor: pointer;
+        }
+        .edit:hover{
+           opacity:0.5;
+       }
+       .delete:hover{
+          opacity:0.5;
+      }
+   }
+}

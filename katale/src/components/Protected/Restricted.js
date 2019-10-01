@@ -16,7 +16,7 @@ class Restricted extends Component  {
   render(){
     const { children , roles, currentUser} = this.props;
     let isAuthorized;
-
+ 
     if (currentUser){
       isAuthorized = roles.includes(currentUser.role.name);
     }
