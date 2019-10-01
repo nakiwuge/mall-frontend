@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUser } from '../../Actions/UserAction';
 import Restricted from '../Protected/Restricted';
 import { authService } from '../../utils/authentication';
 
 class NavBar extends Component {
   state={
-    hideLogin:false
+    hideLogin:false,
+    showCategoryMenu: false
   }
 
   async componentWillMount(){
@@ -25,9 +24,19 @@ class NavBar extends Component {
       hideLogin:false
     });
   }
+  handleHover=()=>{
+    this.setState({
+      showCategoryMenu: true
+    });
+  }
+  handleMouseLeave=()=>{
+    this.setState({
+      showCategoryMenu: false
+    });
+  }
 
   render() {
-    const {hideLogin} = this.state;
+    const {hideLogin, showCategoryMenu} = this.state;
 
     return (
       <React.Fragment>
@@ -37,7 +46,18 @@ class NavBar extends Component {
             <ul>
               <div className="nav-center">
                 <li><Link to="/">Home</Link></li>
-                <li ><Restricted roles={['admin', 'superAdmin']}><div > <Link to="/store-categories">Store Categories</Link></div></Restricted></li>
+                <li >
+                  <Restricted roles={['admin', 'superAdmin']}>
+                    <div onMouseEnter={this.handleHover} onMouseLeave={this.handleMouseLeave} >
+                      <div className="categories">Categories</div>
+                      {showCategoryMenu
+                      &&<div className="dropdown">
+                        <div ><Link to="/store-categories">Store Categories</Link></div>
+                        <div ><Link to="/item-categories">Item Categories</Link></div>
+                      </div>}
+                    </div>
+                  </Restricted>
+                </li>
                 <li><div><Link to="/">Stores</Link></div></li>
                 <li><Link to="/about">About</Link></li>
               </div>
@@ -55,14 +75,4 @@ class NavBar extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  user: state.userReducer.user,
-  error: state.userReducer.error,
-  currentUser: state.userReducer.currentUser,
-});
-
-const mapDispatchToProps = {
-  getUser
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

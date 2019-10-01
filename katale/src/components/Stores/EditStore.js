@@ -21,7 +21,7 @@ const theme = createMuiTheme({
   },
 });
 
-class   EditStore extends Component{
+class  EditStore extends Component{
   state = {
     isLoading: false,
     error: null,
@@ -30,11 +30,11 @@ class   EditStore extends Component{
     selectedFile: null,
     description: '',
     isValid:false
-
   }
 
   componentDidMount(){
     const { store } = this.props;
+
     if (store){
       this.setState({
         storeName:store.name,
@@ -124,7 +124,7 @@ class   EditStore extends Component{
           <div className="image-wrapper">
             <p>Edit Image</p>
             <span className="image">
-              <img src={(store.imageUrl==='null')?imagePlaceholder:store.imageUrl}/>
+              <img src={(store&&store.imageUrl==='null')?imagePlaceholder:store&&store.imageUrl}/>
             </span>
             <span className="upload">
               <FileUpload

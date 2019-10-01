@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addStoreCategory, getStoreCategories } from '../../Actions/storeCategory';
-import StoreCategoryModal from './StoreCategoryModal';
+import CategoryModal from './CategoryModal';
 
 class AddStoreCategory extends Component {
   state = {
@@ -57,10 +57,11 @@ render() {
 
   return (
     <div >
-      <StoreCategoryModal
+      <CategoryModal
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         action={this.props.action}
+        title="Add Store Category"
         error={this.state.error}
         isLoading={this.state.isLoading}
         open={this.props.open}

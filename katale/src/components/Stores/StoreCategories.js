@@ -6,10 +6,10 @@ import moment from 'moment';
 import { StyledTableCell, StyledTableRow } from '../helperStyles';
 import Spinner from '../common/Spinner';
 import AddStoreCategory from './AddStoreCategory';
-import { authService } from '../../utils/authentication';
 import { getUser } from '../../Actions/UserAction';
 import EditStoreCategory from './EditStoreCategory';
 import DeleteStoreCategory from './DeleteStoreCategory';
+
 class StoreCategories extends Component {
   state = {
     isLoading: true,
@@ -53,14 +53,10 @@ class StoreCategories extends Component {
         id:e.target.getAttribute('id'),
         name:e.target.getAttribute('name')
       }
-
     });
-
   }
 
   async componentDidMount(){
-    const user = await authService.decodeToken();
-    this.props.getUser(user.userId);
     await this.props.getStoreCategories();
     this.setState({isLoading:false});
   }
