@@ -1,78 +1,88 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
 import Restricted from '../Protected/Restricted';
 import { authService } from '../../utils/authentication';
 
 class NavBar extends Component {
-  state={
-    hideLogin:false,
-    showCategoryMenu: false
+  state = {
+    isLoggedIn: false,
+    showCategoryMenu: false,
+    isActive:false
   }
 
-  async componentWillMount(){
+  async componentWillMount() {
     const isAuthenticated = await authService.isAuthenticated();
-    if (isAuthenticated){
+    if (isAuthenticated) {
       this.setState({
-        hideLogin:true
+        isLoggedIn: true
       });
     }
   }
 
-  logout = ()=>{
+  logout = () => {
     authService.logoutUser();
     this.setState({
-      hideLogin:false
+      isLoggedIn: false
     });
   }
-  handleHover=()=>{
+  handleHover = () => {
     this.setState({
       showCategoryMenu: true
     });
   }
-  handleMouseLeave=()=>{
+  handleMouseLeave = () => {
     this.setState({
       showCategoryMenu: false
     });
   }
+  handleActive = (url) =>{
+    if (this.props.location.pathname === url){
+
+      return true;
+    }
+
+    return false;
+  }
 
   render() {
-    const {hideLogin, showCategoryMenu} = this.state;
+    const { isLoggedIn, showCategoryMenu } = this.state;
+    const {location:{pathname}}= this.props;
 
     return (
       <React.Fragment>
         <div className="navbar">
           <div className="nav-head">
-            <div className="logo">Katale</div>
-            <ul>
-              <div className="nav-center">
-                <li><Link to="/">Home</Link></li>
-                <li >
-                  <Restricted roles={['admin', 'superAdmin']}>
-                    <div onMouseEnter={this.handleHover} onMouseLeave={this.handleMouseLeave} >
-                      <div className="categories">Categories</div>
-                      {showCategoryMenu
-                      &&<div className="dropdown">
-                        <div ><Link to="/store-categories">Store Categories</Link></div>
-                        <div ><Link to="/item-categories">Item Categories</Link></div>
-                      </div>}
-                    </div>
-                  </Restricted>
-                </li>
-                <li><div><Link to="/">Stores</Link></div></li>
-                <li><Link to="/about">About</Link></li>
-              </div>
-              <div className="nav-right">
-                <li><div hidden={hideLogin} ><Link to="/signup">Sign up</Link></div></li>
-                <li><div hidden={hideLogin}><Link to="/login">Login</Link></div></li>
-                <li><div hidden={!hideLogin} onClick={this.logout}>Log out</div></li>
-                <li><Link to="/profile">Profile</Link></li>
-              </div>
-            </ul>
+            <div className="logo">
+              Katale
+            </div>
+            <hr />
           </div>
-          <div className="bottom"></div>
+          <ul>
+            <li  className={`${(this.handleActive('/') || pathname.includes('items')) ?'isActive':''}`}><Link to="/">Home</Link></li>
+
+            <li className={`${pathname.includes('categories')?'sub-menu isActive':'sub-menu'}`} onMouseEnter={this.handleHover} onMouseLeave={this.handleMouseLeave}  >
+
+              <Restricted roles={['admin', 'superAdmin']}>
+                <a>Categories</a><span className="arrow">></span>
+                {showCategoryMenu
+                  && <div className="dropdown">
+                    <div ><Link to="/categories/store-categories">Store Categories</Link></div>
+                    <div ><Link to="/categories/item-categories">Item Categories</Link></div>
+                  </div>}
+              </Restricted>
+            </li>
+            <li className={`${pathname.includes('/stores')?'isActive':''}`}><div><Link to="/stores">Stores</Link></div></li>
+            <li><Link to="/about">About</Link></li>
+            <hr />
+            <li className={`${isLoggedIn ? 'hide' : ''}`}><Link to="/signup">Sign up</Link></li>
+            <li className={`${isLoggedIn ? 'hide' : ''}`}><Link to="/login">Login</Link></li>
+            <li className={`${!isLoggedIn ? 'hide' : ''}`}><Link to="/profile">Profile</Link></li>
+            <li className={`${!isLoggedIn ? 'hide' : ''}`} onClick={this.logout}><a>Log out</a></li>
+          </ul>
         </div>
       </React.Fragment>
     );
   }
 }
-export default NavBar;
+export default withRouter(NavBar);

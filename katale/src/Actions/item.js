@@ -66,6 +66,9 @@ export const getItem = id => async dispatch=>{
             id
             name
         }
+        store{
+          id
+        }
        }
      } `
   };

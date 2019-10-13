@@ -11,11 +11,17 @@ class Layout extends Component {
 
     return (
       <div className="layout">
-        {!urls.includes(pathname) &&  <NavBar />}
-        <div className="content">
-          {this.props.children}
+        <div className="grid-wrapper">
+          <div className="nav">
+            {!urls.includes(pathname) &&  <NavBar />}
+          </div>
+          <div className="content">
+            {this.props.children}
+          </div>
         </div>
-        {!urls.includes(pathname) && <Footer/> }
+        <div className="footer">
+          {!urls.includes(pathname) && <Footer/> }
+        </div>
       </div>
     );
   }}

@@ -24,21 +24,20 @@ const ModalContainer = (props)=>  {
   const newClass = useStyles();
 
   return (
-    <div className="modal">
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-        <div style={modalstyle} className={newClass.paper}>
-          {renderContent()}
-          <div className="spinner" hidden={!isLoading}>
-            <Spinner />
-          </div>
+    <Modal
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      open={open}
+      onClose={handleClose}
+      className="modal"
+    >
+      <div style={modalstyle} className={newClass.paper}>
+        {renderContent()}
+        <div hidden={!isLoading} >
+          <Spinner />
         </div>
-      </Modal>
-    </div>
+      </div>
+    </Modal>
   );
 };
 

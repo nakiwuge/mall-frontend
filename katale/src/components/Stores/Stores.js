@@ -10,9 +10,11 @@ import { styled } from '@material-ui/styles';
 import { trimString } from '../../utils/trimString';
 import imagePlaceholder from '../../Assets/images/image_placeholder.png';
 import { getStores } from '../../Actions/store';
-
+import Restricted from '../Protected/Restricted';
+import Search from '../common/search';
+import AddStore from './AddStore';
 const NewCard = styled(Card)({
-  width: 351,
+  width: 320,
 });
 
 const NewCardMedia = styled(CardMedia)({
@@ -23,6 +25,19 @@ const NewCardMedia = styled(CardMedia)({
 class Stores extends Component {
   state = {
     isLoading: true,
+    open:false,
+  }
+  
+  handleClose=()=>{
+    this.setState({
+      open:false,
+    });
+  }
+
+  onClick=()=>{
+    this.setState({
+      open:true,
+    });
   }
 
   async componentDidMount(){
@@ -59,16 +74,27 @@ class Stores extends Component {
 
   render() {
     const {stores} = this.props;
-    const {isLoading} =this.state;
+    const {isLoading,open} =this.state;
 
     return (
       <React.Fragment>
-        <section>
-          <div className="stores">
-            {isLoading&&<Spinner/>}
-            {(stores&&stores.length>0)&&this.renderCard(stores)}
-          </div>
-        </section>
+        <div className="stores">
+          <header>
+            <span className="title">Stores</span>
+            <Search/>
+            <span className="add-button">
+              <Restricted roles={['admin', 'superAdmin', 'seller']}>
+                <button   onClick={this.onClick}>Add Store</button>
+              </Restricted>
+            </span>
+          </header>
+          {isLoading&&<Spinner/>}
+          {(stores&&stores.length>0)&&this.renderCard(stores)}
+          <AddStore
+            open={open}
+            handleClose={this.handleClose}
+          />
+        </div>
       </React.Fragment>
     );
   }

@@ -12,9 +12,9 @@ const theme = createMuiTheme({
 const Spinner = ()=>  {
 
   return (
-    <div className="spinner">
+    <div className="loader">
       <ThemeProvider theme ={theme}>
-        <div className="loader"><CircularProgress  color="primary" /> </div>
+        <CircularProgress  color="primary" />
       </ThemeProvider>
     </div>
   );

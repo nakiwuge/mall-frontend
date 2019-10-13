@@ -10,13 +10,10 @@ import { styled } from '@material-ui/styles';
 import imagePlaceholder from '../../../Assets/images/image_placeholder.png';
 import { trimString } from '../../../utils/trimString';
 import { getOneStore } from '../../../Actions/store';
-import { useCheckOwner } from '../../Hooks/checkOwner';
-import AddItem from './AddItem';
-import { useModal } from '../../Hooks/modal';
-import Search from '../../common/search';
+import { getItems } from '../../../Actions/item';
 
 const NewCard = styled(Card)({
-  width: 338,
+  width: 320,
 });
 
 const NewCardMedia = styled(CardMedia)({
@@ -24,25 +21,22 @@ const NewCardMedia = styled(CardMedia)({
   paddingTop: '70%', // 16:9
 });
 
-const Items  = (props)=>{
-  const {items,store, getOneStore, storeId, currentUser, match} = props;
+const AllItems  = (props)=>{
+  const {items,getItems} = props;
   const [isLoading, setLoading] = useState(true);
-  const [isOwner,checkOwner] = useCheckOwner(currentUser, store);
-  const [open,_,handleClose,handleOpen]= useModal();
 
   useEffect(()=>{
-    getOneStore(storeId).then(
+    getItems().then(
       ()=>{
-        checkOwner();
         setLoading(false);
       });
 
-  },[currentUser,items]);
+  },[items]);
 
   const renderCard = (items)=>{
     return items.map(item=>(
       <div className="card" key={item.id}>
-        <Link to={`${match.url}/items/${item.id}`}>
+        <Link to={`/items/${item.id}`}>
           <NewCard >
             <NewCardMedia
               image={(!item.imageUrl || item.imageUrl.length <10 )?imagePlaceholder:item.imageUrl}
@@ -69,39 +63,22 @@ const Items  = (props)=>{
 
   return (
     <React.Fragment>
-      <section>
-        <div className="items">
-          <header>
-            <div >
-              <span className="title">Available Items</span>
-              <Search/>
-              <div className="add-button" hidden={!isOwner}>
-                <button onClick={handleOpen}>Add Item</button>
-              </div>
-            </div>
-          </header>
-          {isLoading&&<Spinner/>}
-          {(store&&currentUser&&items&&items.length>0)&&renderCard(items)}
-        </div>
-        <AddItem
-          open={open}
-          handleClose={handleClose}
-          param={storeId}
-        />
-      </section>
+      <div className="items">
+        {isLoading&&<Spinner/>}
+        {(items&&items.length>0)&&renderCard(items)}
+      </div>
     </React.Fragment>
   );
 };
 
-const mapStateToProps = ({itemReducer, storeReducer, userReducer}) => ({
-  items: storeReducer.storeItems,
-  store: storeReducer.store,
+const mapStateToProps = ({itemReducer}) => ({
+  items: itemReducer.items,
   error: itemReducer.error,
-  currentUser: userReducer.currentUser,
 });
 
 const mapDispatchToProps = {
   getOneStore,
+  getItems
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Items);
+export default connect(mapStateToProps, mapDispatchToProps)(AllItems);

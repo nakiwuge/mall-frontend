@@ -9,7 +9,7 @@ import EditItem from './EditItem';
 import DeleteItem from './DeleteItem';
 
 const ViewSingleItem  = (props)=>{
-  const { store, currentUser, updatedItem,  getItem, item, match:{params}} = props;
+  const { store, currentUser, updatedItem, getItem, item, match:{params,url}} = props;
   const [isOwner,checkOwner] = useCheckOwner(currentUser, store);
   const [open,action,handleClose,handleOpen]= useModal();
 
@@ -35,7 +35,10 @@ const ViewSingleItem  = (props)=>{
               <div className="header">{item.name}</div>
               <div className="price">UGX {item.price} {item.negotiable?'(Negotiable)':'(Non Negotiable)' } </div>
               <div className="contact-link">
-                <Link  to={`/stores/${store&&store.id}/details`}>Contact Seller</Link>
+                <Link  to={`/stores/${item.store&&item.store.id}/details`}>Seller Contact</Link>
+              </div>
+              <div className="contact-link" hidden={url!==`/items/${item.id}`}>
+                <Link  to={`/stores/${item.store&&item.store.id}`}>Visit Store</Link>
               </div>
               <div className="actions" hidden={!isOwner}>
                 <span className="edit" name='edit' onClick={handleOpen}>Edit</span>
@@ -43,7 +46,10 @@ const ViewSingleItem  = (props)=>{
               </div>
             </div>
           </div>
-          <div className="description">{item.description}</div>
+          <div className="description">
+            <div className="description_header">Description</div>
+            <div className="description_body">{item.description}</div>
+          </div>
         </div>
       }
       {(action==='edit')
