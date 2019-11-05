@@ -1,0 +1,5 @@
+runtime: nodejs
+env: flex
+service: katale
+includes:
+  - env_variables.yaml
