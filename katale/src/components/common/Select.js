@@ -5,10 +5,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 
 const SelectContainer = (props)=>  {
-  const { handleChange, selectValue, menuItems , label, name}= props;
+  const { handleChange, selectValue, menuItems , label, name,id}= props;
 
   return (
-    <div className="select">
+    <div className="select" id={id}>
       <FormControl  fullWidth>
         <InputLabel   htmlFor={name}>{label}</InputLabel>
         <Select
@@ -19,8 +19,8 @@ const SelectContainer = (props)=>  {
             id: name,
           }}
         >
-          {menuItems.map(item =>(
-            <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+          {menuItems&&menuItems.map(item =>(
+            <MenuItem  value={item.id} key={item.id}>{item.name}</MenuItem>
           ))}
         </Select>
       </FormControl >

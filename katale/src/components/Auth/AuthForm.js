@@ -39,7 +39,7 @@ const AuthForm = (props)=>  {
     <div className="auth-form">
       <div className="header">{(authType==='signup')?'Please fill in this form to create an account':'Login here'}</div>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="error">{ error }</div>
+        <div className="error" >{ error }</div>
         <div     hidden={authType==='login'}>
           <CssTextField
             id="standard-first-name"
@@ -66,6 +66,7 @@ const AuthForm = (props)=>  {
             label="Email"
             margin="normal"
             fullWidth
+            name="email"
             onChange={handleChange('email')}
             value={email}
           />
@@ -106,6 +107,7 @@ const AuthForm = (props)=>  {
             label="Password"
             type="password"
             margin="normal"
+            name="passwd"
             fullWidth
             onChange={handleChange('password')}
             value={password}
@@ -120,6 +122,7 @@ const AuthForm = (props)=>  {
             label="Confirm Password"
             type="password"
             margin="normal"
+            name="cpwd"
             fullWidth
             onChange={handleChange('confirmPassword')}
             value={confirmPassword}
@@ -136,6 +139,7 @@ const AuthForm = (props)=>  {
               color: isValid?'white': 'grey',
             }}
             type="submit"
+            name="submit"
             disabled={!isValid}
           >
         Submit

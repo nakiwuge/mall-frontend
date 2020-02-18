@@ -27,7 +27,7 @@ class Stores extends Component {
     isLoading: true,
     open:false,
   }
-  
+
   handleClose=()=>{
     this.setState({
       open:false,
@@ -84,7 +84,7 @@ class Stores extends Component {
             <Search/>
             <span className="add-button">
               <Restricted roles={['admin', 'superAdmin', 'seller']}>
-                <button   onClick={this.onClick}>Add Store</button>
+                <button     name="add-store"  onClick={this.onClick}>Add Store</button>
               </Restricted>
             </span>
           </header>

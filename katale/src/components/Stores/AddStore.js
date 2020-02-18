@@ -85,7 +85,7 @@ class   AddStore extends Component{
           </Typography>
           <div className="store-name">
             <CssTextField
-              id="standard-email"
+              id="store-name"
               label="Name"
               margin="normal"
               fullWidth
@@ -93,17 +93,18 @@ class   AddStore extends Component{
             />
           </div>
           <CssTextField
-            id="standard-email"
+            id="store-description"
             label="Description"
             margin="normal"
             fullWidth
             onChange={this.handleChange('description')}
           />
           <SelectContainer
+            id="store-category"
             menuItems={categories?categories:null}
             label="Select Category"
             selectValue={category}
-            name="category"
+
             handleChange={this.handleChange('category')}
           />
           <FileUpload
@@ -121,6 +122,7 @@ class   AddStore extends Component{
                 fontSize: '18px',
                 color: 'white',
               }}
+              name="sub-store"
               type="submit"
             >
               Submit
@@ -130,7 +132,7 @@ class   AddStore extends Component{
       </div>
     );
   };
-  
+
   render (){
     const{ open,handleClose}= this.props;
     const{ isLoading }= this.state;

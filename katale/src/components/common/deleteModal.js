@@ -27,7 +27,7 @@ const  DeleteModal = (props)=>{
   const  renderContent =()=>{
 
     return(
-      <div className="delete-modal" >
+      <div className="delete-modal"  id="deleteModal">
         <div>
           <Typography variant="h4" id="modal-title" color="primary" >
             This Action cannot be undone!

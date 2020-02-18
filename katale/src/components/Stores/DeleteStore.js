@@ -26,7 +26,7 @@ class   DeleteStore extends Component{
 
      if(deletedStore && (store.id===deletedStore.id)) {
 
-       return <Redirect to="/"/>;
+       return <Redirect to="/stores"/>;
      }
 
      return (
