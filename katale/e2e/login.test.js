@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By,until} = require('selenium-webdriver');
 const assert = require('chai').assert;
 const  expect = require('chai').expect;
 
@@ -30,7 +30,7 @@ describe("Login", async() =>{
     await driver.findElement(By.css("input[name='passwd']")).sendKeys('00000099');
     await driver.findElement(By.css("button[name='submit']")).click();
 
-    let error = await driver.findElement(By.className('error'))
+    let error = await driver.findElement(By.className('error'));
 
     await driver.wait(until.elementTextIs(error,'Wrong email or password'), 5000);
     expect(await error.getText()).to.include('Wrong');

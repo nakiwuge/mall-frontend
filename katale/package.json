@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-prod": "npm run build && npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "e2e-test": "mocha --timeout 20000 e2e",
