@@ -30,7 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "e2e-test": "mocha mocha --timeout 10000 e2e",
+    "e2e-test": "mocha --timeout 20000 e2e",
     "eject": "react-scripts eject",
     "fix": "eslint . --fix --ignore-path .gitignore"
   },
@@ -53,5 +53,8 @@
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "mocha": "^7.0.1"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
