@@ -1,1 +1,1 @@
-web: cd katale && npm run start-prod
+web: npm run start-prod
